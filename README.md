@@ -1,2 +1,7 @@
-# olimpijska-igre
-Seminarska naloga pri Podatkovnih bazah 1
+# Olimpijske igre
+
+Avtorici:
+* Tjaša Košenina
+* Urša Klun
+
+Seminarska naloga pri *Podatkovnih bazah 1*.
