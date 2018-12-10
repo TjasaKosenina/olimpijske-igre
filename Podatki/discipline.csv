@@ -1,50 +1,50 @@
-id, disciplina
-1,100m
-2,200m
-3,800m
-4,100m ovire
-5,1500m
-6,kladivo
-7,daljina
-8,kopje
-9,krogla
-10,palica
-11,troskok
-12,visina
-13,maraton
-14,cestna dirka
-16,leteci holandec
-17,lechner A-390
-18,laser
-19,FINN
-20,do 60kg
-21,do63kg
-22,do 65kg
-23,nad 100kg
-24, nad 78kg
-25,C-1
-26,K-1
-27,posamezno
-28,MK puska 3x40
-29,MK puska 60 lezece
-30,zracna puska
-31,posamezno
-32,dvojice
-33,enojec
-34,dvojec brez krmarja
-35,cetverec brez krmarja
-36,dvojni cetverec
-37,dvojni dvojec
-38,posamezno
-39,kros
-40,100m delfin
-41,100m hrbtno
-42,100m prosto
-43,100m prsno
-44,400m mesano
-45,4x100 mesano
-46,bradlja
-47,gred
-48,parter
-49,krogi
-50,ekipa
+id, disciplina,id_sport
+1,100m,1
+2,200m,1
+3,800m,1
+4,100m ovire,1
+5,1500m,1
+6,kladivo,1
+7,daljina,1
+8,kopje,1
+9,krogla,1
+10,palica,1
+11,troskok,1
+12,visina,1
+13,maraton,1
+14,cestna dirka,2
+16,leteci holandec,3
+17,lechner A-390,3
+18,laser,3
+19,FINN,3
+20,do 60kg,4
+21,do 63kg,4
+22,do 65kg,4
+23,nad 100kg,4
+24, nad 78kg,4
+25,C-1,5
+26,K-1,5
+27,posamezno,6
+28,MK puska 3x40,7
+29,MK puska 60 lezece,7
+30,zracna puska,7
+31,posamezno,8
+32,dvojice,9
+33,enojec,10
+34,dvojec brez krmarja,10
+35,cetverec brez krmarja,10
+36,dvojni cetverec,10
+37,dvojni dvojec,10
+38,posamezno,11
+39,kros,12
+40,100m delfin,13
+41,100m hrbtno,13
+42,100m prosto,13
+43,100m prsno,13
+44,400m mesano,13
+45,4x100 mesano,13
+46,bradlja,14
+47,gred,14
+48,parter,14
+49,krogi,14
+50,ekipa,15
