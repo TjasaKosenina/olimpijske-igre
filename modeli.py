@@ -92,3 +92,33 @@ def podatki_osebe(id_osebe):
         disciplina, mesto = conn.execute(poizvedba_za_podatke, [id_osebe]).fetchall()
     return ime, priimek,disciplina, mesto
 
+def poisci_discipline(disciplina):
+    """
+    Funkcija, ki vrne ID discipline.
+    >>> poisci_discipline('krogla')
+    [9]
+    """
+    poizvedba = """
+        SELECT id
+        FROM discipline
+        WHERE disciplina = ?
+    """
+    return conn.execute(poizvedba, [disciplina]).fetchone()
+
+def podatki_disciplina(id_disciplina):
+    """
+    Vrne podatke o osebah ter uvrstitvah v dani disciplini z danim IDjem.
+    >>> podatki_disciplina(8)
+    ('Belia Verduin', )
+    """
+    poizvedba = """
+        SELECT osebe.ime, osebe.priimek, olimpijske_igre.leto 
+        FROM osebe 
+            JOIN uvrstitve ON osebe.id = uvrstitve.id_osebe
+            JOIN olimpijske_igre ON olimpijske_igre.kljuc = uvrstitve.kljuc_leto
+        WHERE id_disciplina = ? AND uvrstitve.mesto == 1
+    """
+    osebe = []
+    for (ime,priimek,leto) in conn.execute(poizvedba, [id_disciplina]):
+        osebe.append((ime,priimek,leto))
+    return osebe

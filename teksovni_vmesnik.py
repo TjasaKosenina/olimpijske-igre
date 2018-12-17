@@ -69,9 +69,21 @@ def prikazi_podatke_osebe():
     else:
         ime,priimek, disciplina, mesto  = modeli.podatki_osebe(id_osebe)
         print('{} {}'.format(ime,priimek))
-        print(' disciplina: {}'.format(disciplina))
-        print(' uvrstitev: {}'.format(mesto))
+        print('uvrstitev: {}, {}'.format(disciplina, mesto))
         
+def izberi_disciplino():
+    niz = input('Vnesite disciplino: ')
+    kljuc_disciplina = modeli.poisci_discipline(niz)
+    return None if kljuc_disciplina is None else kljuc_disciplina[0]
+
+def prikazi_prvouvrscene_v_disciplini():
+    kljuc_disciplina = izberi_disciplino()
+    if kljuc_disciplina is None:
+        print ('Disciplina ne obstaja.')
+    else:
+        ime, priimek, leto = modeli.podatki_disciplina(kljuc_disciplina)
+        print('{} {} {}'.format(ime, priimek, leto))
+
 
 def pokazi_moznosti():
     print(50 * '-')
@@ -83,12 +95,13 @@ def pokazi_moznosti():
         '',
         '',
     ])
+    
     if izbira == 0:
         prikazi_podatke_OI()
     elif izbira == 1:
         prikazi_podatke_osebe()
     elif izbira == 2:
-        ()
+        prikazi_prvouvrscene_v_disciplini()
     elif izbira == 3:
         ()
     elif izbira == 4:
