@@ -53,7 +53,7 @@ def ustvari_tabele(conn):
             id_osebe        INTEGER REFERENCES osebe(id),
             id_disciplina   INTEGER REFERENCES discipline(id),
             kljuc_leto      INTEGER REFERENCES olimpijske_igre(kljuc),
-            PRIMARY KEY (id_osebe, id_discipline, kljuc_leto)
+            PRIMARY KEY (id_osebe, id_disciplina, kljuc_leto)
         );
     """)
 
@@ -147,4 +147,4 @@ def ustvari_bazo_ce_ne_obstaja(conn):
     with conn:
         cur = conn.execute("SELECT COUNT(*) FROM sqlite_master")
         if cur.fetchone() == (0, ):
-ustvari_bazo(conn)
+            ustvari_bazo(conn)

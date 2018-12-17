@@ -1,4 +1,3 @@
-
 import baza
 import sqlite3
 
@@ -15,9 +14,9 @@ def poisci_olimpijske(letoPodano):
     poizvedba = """
         SELECT kljuc
         FROM olimpijske_igre
-        WHERE letoPodano = leto
+        WHERE leto = ?
     """
-    return conn.execute(poizvedba, letoPodano)
+    return conn.execute(poizvedba, [letoPodano]).fetchone()
 
 
 
@@ -30,11 +29,10 @@ def podatki_olimpijske(kljucPodan):
     poizvedba = """
         SELECT zacetek, konec, mesto, st_drzav
         FROM olimpijske_igre
-        WHERE kljuc == kljucPodan
+        WHERE kljuc = ?
     """
-    return conn.execute(poizvedba, kljucPodan)
-
-
+    return conn.execute(poizvedba, [kljucPodan]).fetchone()
+    
 
 def poisci_osebe(niz):
     """
@@ -74,7 +72,7 @@ def podatki_osebe(id_osebe):
     ('Belia Verduin', )
     """
     poizvedba = """
-        SELECT ime FROM osebe WHERE id = ?
+        SELECT ime,priimek FROM osebe WHERE id = ?
     """
     cur = conn.cursor()
     cur.execute(poizvedba, [id_osebe])
@@ -87,10 +85,10 @@ def podatki_osebe(id_osebe):
             SELECT discipline.disciplina, uvrstitve.mesto
             FROM uvrstitve
                  JOIN osebe ON uvrstitve.id_osebe = osebe.id
-                 JOIN discipline ON discipline.id = uvrstitve.id_discipline
+                 JOIN discipline ON discipline.id = uvrstitve.id_disciplina
             WHERE osebe.id = ?
             ORDER BY uvrstitve.mesto
         """
         disciplina, mesto = conn.execute(poizvedba_za_podatke, [id_osebe]).fetchall()
-    return ime, priimek, disciplina, mesto
+    return ime, priimek,disciplina, mesto
 

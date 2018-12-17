@@ -40,11 +40,11 @@ def izberi_moznost(moznosti):
 def izberi_olimpijske():
     niz = input('Vnesite leto olimpijskih iger: ')
     kljuc_olimpijskih = modeli.poisci_olimpijske(niz)
-    return None if kljuc_olimpijskih is None else kljuc_olimpijskih
+    return None if kljuc_olimpijskih is None else kljuc_olimpijskih[0]
 
 def prikazi_podatke_OI():
     kljuc_olimpijskih = izberi_olimpijske()
-    if leto_olimpijskih is None:
+    if kljuc_olimpijskih is None:
         print ('Nobene olimpijske igre ne ustrezajo podanemu letu.')
     else:
         zacetek, konec, mesto, st_drzav = modeli.podatki_olimpijske(kljuc_olimpijskih)
@@ -57,7 +57,7 @@ def izberi_osebo():
     niz = input('Vnesite del imena osebe: ')
     idji_oseb = modeli.poisci_osebe(niz)
     moznosti = [
-        ime for _, ime in modeli.podatki_oseb(idji_oseb)
+        ime for (ime,_,_) in modeli.podatki_oseb(idji_oseb)
     ]
     izbira = izberi_moznost(moznosti)
     return None if izbira is None else idji_oseb[izbira]
@@ -67,8 +67,8 @@ def prikazi_podatke_osebe():
     if id_osebe is None:
         print('Nobena oseba ne ustreza iskalnemu nizu.')
     else:
-        ime, priimek, disciplina, mesto  = modeli.podatki_osebe(id_osebe)
-        print('{} {}'.format(ime, priimek))
+        ime,priimek, disciplina, mesto  = modeli.podatki_osebe(id_osebe)
+        print('{} {}'.format(ime,priimek))
         print(' disciplina: {}'.format(disciplina))
         print(' uvrstitev: {}'.format(mesto))
         
@@ -84,7 +84,7 @@ def pokazi_moznosti():
         '',
     ])
     if izbira == 0:
-        prikazi_podatke_podatke_OI()
+        prikazi_podatke_OI()
     elif izbira == 1:
         prikazi_podatke_osebe()
     elif izbira == 2:
