@@ -119,6 +119,6 @@ def podatki_disciplina(id_disciplina):
         WHERE id_disciplina = ? AND uvrstitve.mesto == 1 
     """
     osebe = []
-    for (ime,priimek,leto) in conn.execute(poizvedba, [id_disciplina]):
+    for ime,priimek,leto in conn.execute(poizvedba, [id_disciplina]):
         osebe.append((ime,priimek,leto))
     return osebe
