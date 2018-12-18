@@ -107,7 +107,7 @@ def poisci_discipline(disciplina):
 
 def podatki_disciplina(id_disciplina):
     """
-    Vrne podatke o osebah ter uvrstitvah v dani disciplini z danim IDjem.
+    Vrne podatke o prvouvrščenih osebah v dani disciplini z danim IDjem.
     >>> podatki_disciplina(8)
     ('Belia Verduin', )
     """
@@ -116,7 +116,7 @@ def podatki_disciplina(id_disciplina):
         FROM osebe 
             JOIN uvrstitve ON osebe.id = uvrstitve.id_osebe
             JOIN olimpijske_igre ON olimpijske_igre.kljuc = uvrstitve.kljuc_leto
-        WHERE id_disciplina = ? AND uvrstitve.mesto == 1
+        WHERE id_disciplina = ? AND uvrstitve.mesto == 1 
     """
     osebe = []
     for (ime,priimek,leto) in conn.execute(poizvedba, [id_disciplina]):
