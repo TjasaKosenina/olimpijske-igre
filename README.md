@@ -6,7 +6,7 @@ Avtorici:
 
 Seminarska naloga pri *Podatkovnih bazah 1*.
 
-#OPIS
+# OPIS
 V bazo bomo zbrali podatke o olimpijskih igrah, tekmovalcih ter njihovih uvrstitvah v določeni disciplini. Končni izdelek bo spletna storitev, v kateri bo uporabnik lahko:
 * Pogledal informacije o olimpijskih igrah.
 * Pregledal podatke o tekmovalcih.
