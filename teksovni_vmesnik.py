@@ -80,11 +80,13 @@ def prikazi_prvouvrscene_v_disciplini():
     kljuc_disciplina = izberi_disciplino()
     if kljuc_disciplina is None:
         print ('Disciplina ne obstaja.')
-    elif modeli.podatki_disciplina(kljuc_disciplina) == []:
-        print('V tej disciplini ni prvouvrščenih.')
     else:
-        ime, priimek, leto = modeli.podatki_disciplina(kljuc_disciplina)
-        print('{} {} {}'.format(ime, priimek, leto))
+        zmagovalci = modeli.podatki_disciplina(kljuc_disciplina)
+        if len(zmagovalci) == 0:
+            print('V tej disciplini ni prvouvrščenih.')
+        else:
+            for ime, priimek, leto in zmagovalci:
+                print('{} {} ({})'.format(ime, priimek, leto))
 
 
 def pokazi_moznosti():

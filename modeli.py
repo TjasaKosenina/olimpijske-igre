@@ -108,8 +108,8 @@ def poisci_discipline(disciplina):
 def podatki_disciplina(id_disciplina):
     """
     Vrne podatke o prvouvrščenih osebah v dani disciplini z danim IDjem.
-    >>> podatki_disciplina(8)
-    ('Belia Verduin', )
+    >>> podatki_disciplina(100m delfin)
+    (Crissy Keyhoe (1976) )
     """
     poizvedba = """
         SELECT osebe.ime, osebe.priimek, olimpijske_igre.leto 
