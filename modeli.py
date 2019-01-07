@@ -82,15 +82,16 @@ def podatki_osebe(id_osebe):
     else:
         ime,priimek = osnovni_podatki
         poizvedba_za_podatke = """
-            SELECT discipline.disciplina, uvrstitve.mesto
+            SELECT sporti.sport, discipline.disciplina, uvrstitve.mesto
             FROM uvrstitve
                  JOIN osebe ON uvrstitve.id_osebe = osebe.id
                  JOIN discipline ON discipline.id = uvrstitve.id_disciplina
+                 JOIN sporti ON sporti.kljuc = discipline.id_sport 
             WHERE osebe.id = ?
             ORDER BY uvrstitve.mesto
         """
-        disciplina, mesto = conn.execute(poizvedba_za_podatke, [id_osebe]).fetchall()
-    return ime, priimek,disciplina, mesto
+        uvrstitve = conn.execute(poizvedba_za_podatke, [id_osebe]).fetchall()
+    return ime, priimek, uvrstitve
 
 def poisci_discipline(disciplina):
     """

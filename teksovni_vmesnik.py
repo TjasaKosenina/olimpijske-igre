@@ -57,7 +57,7 @@ def izberi_osebo():
     niz = input('Vnesite del imena osebe: ')
     idji_oseb = modeli.poisci_osebe(niz)
     moznosti = [
-        ime for (ime,_,_) in modeli.podatki_oseb(idji_oseb)
+        "{} {}".format(ime, priimek) for (_,ime,priimek) in modeli.podatki_oseb(idji_oseb)
     ]
     izbira = izberi_moznost(moznosti)
     return None if izbira is None else idji_oseb[izbira]
@@ -67,9 +67,10 @@ def prikazi_podatke_osebe():
     if id_osebe is None:
         print('Nobena oseba ne ustreza iskalnemu nizu.')
     else:
-        ime,priimek, disciplina, mesto  = modeli.podatki_osebe(id_osebe)
+        ime, priimek, uvrstitve = modeli.podatki_osebe(id_osebe)
         print('{} {}'.format(ime,priimek))
-        print('uvrstitev: {}, {}'.format(disciplina, mesto))
+        for sport, disciplina, mesto in uvrstitve:
+            print('uvrstitev:{} ({}), mesto: {}'.format(sport,disciplina, mesto))
         
 def izberi_disciplino():
     niz = input('Vnesite disciplino: ')
