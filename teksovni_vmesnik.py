@@ -98,6 +98,7 @@ def pokazi_moznosti():
         'dodaj olimpijske igre',
         'preglej najslabše in najboljše športnike v disciplini',
         'preglej najsalbše in najboljše športnike v letu',
+        'izhod'
     ])
     
     if izbira == 0:
@@ -109,6 +110,8 @@ def pokazi_moznosti():
     elif izbira == 3:
         ()
     elif izbira == 4:
+        ()
+    elif izbira == 5:
         ()
     else:
         print('Nasvidenje!')
