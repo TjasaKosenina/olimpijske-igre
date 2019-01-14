@@ -5,6 +5,14 @@ conn = sqlite3.connect('olimpijske-igre.db')
 baza.ustvari_bazo_ce_ne_obstaja(conn)
 conn.execute('PRAGMA foreign_keys = ON')
 
+def mozna_leta():
+    poizvedba = """
+        SELECT leto 
+        FROM olimpijske_igre
+    """
+    leta = conn.execute(poizvedba)
+    return [leto for leto, in leta]
+
 def poisci_olimpijske(letoPodano):
     """
     Funkcija, ki vrne kljuc
@@ -16,13 +24,14 @@ def poisci_olimpijske(letoPodano):
         FROM olimpijske_igre
         WHERE leto = ?
     """
-    return conn.execute(poizvedba, [letoPodano]).fetchone()
+    indeks, = conn.execute(poizvedba, [letoPodano]).fetchone()
+    return indeks
 
 
 
 def podatki_olimpijske(kljucPodan):
     """
-    Funkcija, ki vrne začetek, konec, kraj OI in stevilo drzav
+    Funkcija, ki vrne začetek, konec, kraj OI in stevilo drzav.
     >>> poisci_olimpijske('11')
     [29.7., 14.8., London, 44]
     """
