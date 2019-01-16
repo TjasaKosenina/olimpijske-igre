@@ -31,14 +31,25 @@ def podatki_olimpijskih_iger(leto):
         st_drzav = st_drzav
 )
 
-@get('/iskanje/')
-def iskanje():
+@get('/iskanjeTekmovalcev/')
+def iskanjeTekmovalcev():
     niz = request.query.tekmovalec
     idji_oseb = modeli.poisci_osebe(niz)
     #podatki = modeli.podatki_osebe(idji_oseb)
     podatki = [modeli.podatki_osebe(id_osebe) for id_osebe in idji_oseb]
     return template(
-        'rezultati_iskanja',
+        'rezultati_iskanja_tekmovalcev',
+        niz=niz,
+        podatki = podatki,
+)
+
+@get('/iskanjeDiscipline/')
+def iskanjeDisciplin():
+    niz = request.query.disciplina
+    id_discipline = modeli.poisci_discipline(niz)
+    podatki = modeli.podatki_disciplina(id_discipline)
+    return template(
+        'rezultati_iskanja_discipline',
         niz=niz,
         podatki = podatki,
 )

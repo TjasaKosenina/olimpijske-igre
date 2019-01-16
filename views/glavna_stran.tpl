@@ -13,8 +13,17 @@
 % end
 </ul>
 
+ Vpišite ime osebe ali del imena osebe ter preverite njene uvrstitve:
 
-<form action="iskanje/" method="get">
+<form action="iskanjeTekmovalcev/" method="get">
 <input type="text" name="tekmovalec" value="" />
 <input type="submit" value="Išči tekmovalca">
 </form>
+
+Vpišite ime discipline:
+
+<form action="iskanjeDiscipline/" method="get">
+<input type="text" name="disciplina" value="" />
+<input type="submit" value="Išči disciplino">
+</form>
+
