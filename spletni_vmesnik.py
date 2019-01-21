@@ -2,6 +2,12 @@ import bottle
 from bottle import get, post, run, template, request, redirect
 import modeli
 import hashlib
+import random
+
+SKRIVNOST = 'moja skrivnost'
+
+def prijavljen_uporabnik():
+    return request.get_cookie('prijavljen', secret=SKRIVNOST) == 'da'
 
 def url_leto(id):
     return '/leto/{}/'.format(id)
@@ -16,6 +22,7 @@ def glavna_stran():
     return template(
         'glavna_stran',
         leto = leto,
+        prijavljen=prijavljen_uporabnik()
     )
 
 @get('/olimpijske_igre/<leto:int>/')
@@ -47,11 +54,78 @@ def iskanjeTekmovalcev():
 def iskanjeDisciplin():
     niz = request.query.disciplina
     id_discipline = modeli.poisci_discipline(niz)
+    if id_discipline is None:
+        return template(
+            'rezultati_ni_prvouvrscenih',
+            niz = niz,
+        )
+    id_discipline, = id_discipline
     podatki = modeli.podatki_disciplina(id_discipline)
     return template(
         'rezultati_iskanja_discipline',
         niz=niz,
         podatki = podatki,
 )
+
+@get('/dodaj_OI/')
+def dodaj_OI():
+    if not prijavljen_uporabnik():
+        raise bottle.HTTPError(401)
+    return template('dodaj_OI',
+                    leto="",
+                    mesto="",
+                    zacetek="",
+                    konec="",
+                    st_drzav="",
+                    napaka=False)
+
+
+@post('/dodaj_OI/')
+def dodajanje_OI():
+    if not prijavljen_uporabnik():
+        raise bottle.HTTPError(401)
+    try:
+        id = modeli.dodaj_OI(leto=request.forms.leto,
+                            mesto=request.forms.mesto,
+                            zacetek=request.forms.zacetek,
+                            konec=request.forms.konec,
+                            st_drzav=request.forms.st_drzav)
+    except:
+        return template('dodaj_OI',
+                        leto=request.forms.leto,
+                        mesto=request.forms.mesto,
+                        zacetek=request.forms.zacetek,
+                        konec=request.forms.konec,
+                        st_drzav=request.forms.st_drzav,
+                        napaka=True)
+    redirect('/olimpijske_igre/{}/'.format(request.forms.leto))
+
+@post('/prijava/')
+def prijava():
+    uporabnisko_ime = request.forms.uporabnisko_ime
+    geslo = request.forms.geslo
+    if modeli.preveri_geslo(uporabnisko_ime, geslo):
+        bottle.response.set_cookie(
+            'prijavljen', 'da', secret=SKRIVNOST, path='/')
+        redirect('/')
+    else:
+        raise bottle.HTTPError(403, "BOOM!")
+
+@get('/odjava/')
+def odjava():
+    bottle.response.set_cookie('prijavljen', '', path='/')
+    redirect('/')
+
+@post('/registracija/')
+def registracija():
+    uporabnisko_ime = request.forms.uporabnisko_ime
+    geslo = request.forms.geslo
+    if modeli.ustvari_uporabnika(uporabnisko_ime, geslo):
+        bottle.response.set_cookie(
+            'prijavljen', 'da', secret=SKRIVNOST, path='/')
+        redirect('/')
+    else:
+        raise bottle.HTTPError(
+            403, "Uporabnik s tem uporabniškim imenom že obstaja!")
 
 run(reloader=True, debug=True)

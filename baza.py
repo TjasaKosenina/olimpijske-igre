@@ -56,6 +56,13 @@ def ustvari_tabele(conn):
             PRIMARY KEY (id_osebe, id_disciplina, kljuc_leto)
         );
     """)
+    conn.execute("""
+        CREATE TABLE uporabniki (
+            uporabnisko_ime  TEXT PRIMARY KEY,
+            geslo TEXT,
+            sol TEXT
+        );
+    """)
 
 def uvozi_olimpijske_igre(conn):
     """
