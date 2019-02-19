@@ -53,19 +53,25 @@ def iskanjeTekmovalcev():
 @get('/iskanjeDiscipline/')
 def iskanjeDisciplin():
     niz = request.query.disciplina
-    id_discipline = modeli.poisci_discipline(niz)
+    id_discipline = modeli.poisci_discipline(niz) 
     if id_discipline is None:
+        return template(
+            'disciplina_ne_obstaja',
+            niz = niz
+        )
+    id_discipline, = id_discipline
+    podatki = modeli.podatki_disciplina(id_discipline)
+    if len(podatki) == 0:
         return template(
             'rezultati_ni_prvouvrscenih',
             niz = niz,
         )
-    id_discipline, = id_discipline
-    podatki = modeli.podatki_disciplina(id_discipline)
-    return template(
-        'rezultati_iskanja_discipline',
-        niz=niz,
-        podatki = podatki,
-)
+    else:
+        return template(
+            'rezultati_iskanja_discipline',
+            niz=niz,
+            podatki = podatki,
+        )
 
 @get('/dodaj_OI/')
 def dodaj_OI():

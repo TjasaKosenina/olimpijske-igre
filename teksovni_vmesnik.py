@@ -96,9 +96,6 @@ def pokazi_moznosti():
         'prikaži podatke olipijskih iger',
         'prikaži podatke osebe',
         'prikaži podatke o prvouvrščenih v disciplini',
-        'dodaj olimpijske igre',
-        'preglej najslabše in najboljše športnike v disciplini',
-        'preglej najsalbše in najboljše športnike v letu',
         'izhod'
     ])
     
@@ -108,12 +105,6 @@ def pokazi_moznosti():
         prikazi_podatke_osebe()
     elif izbira == 2:
         prikazi_prvouvrscene_v_disciplini()
-    elif izbira == 3:
-        ()
-    elif izbira == 4:
-        ()
-    elif izbira == 5:
-        ()
     else:
         print('Nasvidenje!')
         exit()
