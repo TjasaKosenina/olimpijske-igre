@@ -40,7 +40,8 @@ def izberi_moznost(moznosti):
 def izberi_olimpijske():
     niz = input('Vnesite leto olimpijskih iger: ')
     kljuc_olimpijskih = modeli.poisci_olimpijske(niz)
-    return None if kljuc_olimpijskih is None else kljuc_olimpijskih[0]
+    return kljuc_olimpijskih
+    #None if kljuc_olimpijskih is None else kljuc_olimpijskih[0]
 
 def prikazi_podatke_OI():
     kljuc_olimpijskih = izberi_olimpijske()

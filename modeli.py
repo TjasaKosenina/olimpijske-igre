@@ -30,7 +30,6 @@ def poisci_olimpijske(letoPodano):
     return indeks
 
 
-
 def podatki_olimpijske(kljucPodan):
     """
     Funkcija, ki vrne začetek, konec, kraj OI in stevilo drzav.
